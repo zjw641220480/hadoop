@@ -1,0 +1,19 @@
+target/
+
+.classpath
+.project
+.settings/
+.DS_Dstore
+
+#java middle class files
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+

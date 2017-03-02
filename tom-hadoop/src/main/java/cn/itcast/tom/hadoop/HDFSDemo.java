@@ -24,12 +24,13 @@ import org.junit.Test;
  * @date 2017年2月27日下午6:09:26
  */
 public class HDFSDemo {
+
 	private FileSystem fileSystem;
 
 	@Before
 	public void prepareHdfs() throws IOException, URISyntaxException, InterruptedException {
 		//创建FileSystem的实现类(工具类)
-		fileSystem = FileSystem.get(new URI("hdfs://192.168.8.88:9000"), new Configuration(),"root");
+		fileSystem = FileSystem.get(new URI("hdfs://192.168.8.88:9000"), new Configuration());
 	}
 	/**
 	 * 
@@ -67,7 +68,7 @@ public class HDFSDemo {
 	/**
 	 * 
 	 * @MethodName:testDownload
-	 * @Description:下载
+	 * @Description:下载,使用此方法进行debug进行源码分析
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 * @Time:2017年2月27日下午6:46:01

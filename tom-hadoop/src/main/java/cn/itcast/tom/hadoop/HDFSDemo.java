@@ -30,7 +30,7 @@ public class HDFSDemo {
 	@Before
 	public void prepareHdfs() throws IOException, URISyntaxException, InterruptedException {
 		//创建FileSystem的实现类(工具类)
-		fileSystem = FileSystem.get(new URI("hdfs://192.168.8.88:9000"), new Configuration());
+		fileSystem = FileSystem.get(new URI("hdfs://192.168.8.88:9000"), new Configuration(),"root");
 	}
 	/**
 	 * 
@@ -44,9 +44,9 @@ public class HDFSDemo {
 	@Test
 	public void testUpload() throws IllegalArgumentException, IOException {
 		//读取本地文件系统的文件,返回输入流
-		InputStream inputStream = new FileInputStream(new File("\\mywork\\src.zip"));
+		InputStream inputStream = new FileInputStream(new File("/tom-hadoop/src/main/java/HTTP_20130313143750.txt"));
 		//在HDFS上创建一个文件,返回输出流,
-		OutputStream outputStream = fileSystem.create(new Path("/src.zip"));
+		OutputStream outputStream = fileSystem.create(new Path("/HTTP_20130313143750.txt"));
 		//输入-->输出
 		IOUtils.copyBytes(inputStream, outputStream, 4096, true);
 	}
@@ -76,8 +76,8 @@ public class HDFSDemo {
 	 */
 	@Test
 	public void testDownload() throws IOException, URISyntaxException {
-		InputStream in = fileSystem.open(new Path("/in.log"));
-		OutputStream outputStream = new FileOutputStream(new File("in.log"));
+		InputStream in = fileSystem.open(new Path("/HTTP_20130313143750.txt"));
+		OutputStream outputStream = new FileOutputStream(new File("in.txt"));
 		IOUtils.copyBytes(in, outputStream, 4096, true);
 	}
 	/**
@@ -119,6 +119,6 @@ public class HDFSDemo {
 	 */
 	@Test
 	public void testDeleteDir() throws IllegalArgumentException, IOException{
-		fileSystem.delete(new Path("/test"),true);
+		fileSystem.delete(new Path("/outsort"),true);
 	}
 }

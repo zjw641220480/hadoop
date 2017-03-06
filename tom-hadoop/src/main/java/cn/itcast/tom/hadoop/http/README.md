@@ -4,5 +4,6 @@
 	HttpReducer:执行此文件的Reducer阶段;
 	OutPut:Map和Reducer的输出对象;
 	HttpCountLoad:执行map和reducer方法;
+	HttpProviderPartitioner:对号码进行分区计算的实现类;
 
 

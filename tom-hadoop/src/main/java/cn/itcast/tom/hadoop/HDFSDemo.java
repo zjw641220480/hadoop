@@ -91,7 +91,7 @@ public class HDFSDemo {
 	 */
 	@Test
 	public void testDelete() throws IllegalArgumentException, IOException{
-		boolean flag = fileSystem.delete(new Path("/src.zip"), true);
+		boolean flag = fileSystem.delete(new Path("/HTTP_20130313143750.txt"), true);
 		System.out.println(flag);
 	}
 	/**
@@ -119,6 +119,6 @@ public class HDFSDemo {
 	 */
 	@Test
 	public void testDeleteDir() throws IllegalArgumentException, IOException{
-		fileSystem.delete(new Path("/outsort"),true);
+		fileSystem.delete(new Path("/invertoutone"),true);
 	}
 }

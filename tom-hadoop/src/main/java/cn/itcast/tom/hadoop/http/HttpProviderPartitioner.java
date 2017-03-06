@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
 /**
  *
  * <p>Title:HttpProviderPartitioner.java</p>
- * <p>Description:第一个partitioner</p>
+ * <p>Description:第一个partitioner,(分区)</p>
  * @author TOM
  * @date 2017年3月3日上午9:08:29
  */

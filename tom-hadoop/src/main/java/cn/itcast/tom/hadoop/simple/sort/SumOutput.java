@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.sort;
+package cn.itcast.tom.hadoop.simple.sort;
 
 import java.io.DataInput;
 import java.io.DataOutput;

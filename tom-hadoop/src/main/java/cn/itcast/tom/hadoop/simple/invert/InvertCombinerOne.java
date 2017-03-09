@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.invert;
+package cn.itcast.tom.hadoop.simple.invert;
 
 import java.io.IOException;
 

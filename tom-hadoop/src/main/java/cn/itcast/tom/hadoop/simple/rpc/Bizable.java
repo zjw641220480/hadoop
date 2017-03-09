@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.rpc;
+package cn.itcast.tom.hadoop.simple.rpc;
 /**
  *
  * <p>Title:Bizable.java</p>

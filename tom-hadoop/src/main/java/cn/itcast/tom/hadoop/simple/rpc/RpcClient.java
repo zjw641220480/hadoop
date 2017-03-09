@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.rpc;
+package cn.itcast.tom.hadoop.simple.rpc;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

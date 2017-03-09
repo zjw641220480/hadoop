@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.mr;
+package cn.itcast.tom.hadoop.simple.mr;
 
 import java.io.IOException;
 

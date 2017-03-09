@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.sort.sort;
+package cn.itcast.tom.hadoop.simple.sort.sort;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import cn.itcast.tom.hadoop.sort.SumOutput;
+import cn.itcast.tom.hadoop.simple.sort.SumOutput;
 
 /**
  *

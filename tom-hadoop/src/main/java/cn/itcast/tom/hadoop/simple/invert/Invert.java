@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.http;
+package cn.itcast.tom.hadoop.simple.invert;
 
 import java.io.IOException;
 
@@ -11,31 +11,29 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 /**
  *
- * <p>Title:HttpCountLoad.java</p>
+ * <p>Title:Invert.java</p>
  * <p>Description:</p>
  * @author TOM
- * @date 2017年3月2日下午4:14:53
+ * @date 2017年3月6日上午10:25:55
  */
-public class HttpCountLoad {
+public class Invert {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		//构建Job对象
 		Job job = Job.getInstance(new Configuration());
-		job.setMapperClass(HttpMapper.class);
+		job.setMapperClass(InvertMapperOne.class);
 		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(HttpOutput.class);
-		job.setJarByClass(HttpCountLoad.class);
+		job.setMapOutputValueClass(Text.class);
 		
-		FileInputFormat.setInputPaths(job, new Path("/HTTP_20130313143750.txt"));
-		
-		job.setReducerClass(HttpReducer.class);
+		job.setReducerClass(InvertReducerOne.class);
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(HttpOutput.class);
+		job.setOutputValueClass(Text.class);
 		
-		FileOutputFormat.setOutputPath(job, new Path("/outhttp"));
+		job.setCombinerClass(InvertCombinerOne.class);
 		
-		job.setPartitionerClass(HttpProviderPartitioner.class);
-		job.setNumReduceTasks(4);
-		//提交任务
+		job.setJarByClass(Invert.class);
+		FileInputFormat.setInputPaths(job, new Path("/invert"));
+		FileOutputFormat.setOutputPath(job, new Path("/invertoutone"));
+		
 		job.waitForCompletion(true);
 	}
 }

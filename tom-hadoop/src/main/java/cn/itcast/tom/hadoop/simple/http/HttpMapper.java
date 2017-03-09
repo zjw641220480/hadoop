@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.http;
+package cn.itcast.tom.hadoop.simple.http;
 
 import java.io.IOException;
 import java.util.List;

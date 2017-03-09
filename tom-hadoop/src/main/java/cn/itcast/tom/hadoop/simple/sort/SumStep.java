@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.invert;
+package cn.itcast.tom.hadoop.simple.sort;
 
 import java.io.IOException;
 
@@ -9,31 +9,36 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+import cn.itcast.tom.hadoop.simple.sort.sum.SumMapper;
+import cn.itcast.tom.hadoop.simple.sort.sum.SumReducer;
+
+
+
 /**
  *
- * <p>Title:Invert.java</p>
+ * <p>Title:SumStep.java</p>
  * <p>Description:</p>
  * @author TOM
- * @date 2017年3月6日上午10:25:55
+ * @date 2017年3月3日上午10:41:49
  */
-public class Invert {
+public class SumStep {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		//构建Job对象
 		Job job = Job.getInstance(new Configuration());
-		job.setMapperClass(InvertMapperOne.class);
+		job.setMapperClass(SumMapper.class);
 		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(Text.class);
-		
-		job.setReducerClass(InvertReducerOne.class);
+		job.setMapOutputValueClass(SumOutput.class);
+		job.setJarByClass(SumStep.class);
+
+		FileInputFormat.setInputPaths(job, new Path("/trade_info.txt"));
+
+		job.setReducerClass(SumReducer.class);
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
-		
-		job.setCombinerClass(InvertCombinerOne.class);
-		
-		job.setJarByClass(Invert.class);
-		FileInputFormat.setInputPaths(job, new Path("/invert"));
-		FileOutputFormat.setOutputPath(job, new Path("/invertoutone"));
-		
+		job.setOutputValueClass(SumOutput.class);
+
+		FileOutputFormat.setOutputPath(job, new Path("/outsum"));
+
+		//提交任务
 		job.waitForCompletion(true);
 	}
 }

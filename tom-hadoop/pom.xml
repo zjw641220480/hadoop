@@ -51,6 +51,14 @@
 			<artifactId>hbase-server</artifactId>
 			<version>0.98.24-hadoop2</version>
 		</dependency>
+		<!-- zookeeper的包 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>tom-hadoop</finalName>

@@ -1,6 +1,7 @@
 package cn.itcast.tom.avtiveMQ.simple;
 
 import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;

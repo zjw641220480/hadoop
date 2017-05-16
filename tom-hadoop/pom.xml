@@ -65,6 +65,12 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.9.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-core -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.7.0</version>
+		</dependency>
 
 	</dependencies>
 	<build>

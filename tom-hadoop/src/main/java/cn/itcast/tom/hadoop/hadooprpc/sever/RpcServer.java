@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.hadooprpc;
+package cn.itcast.tom.hadoop.hadooprpc.sever;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
 import org.apache.hadoop.ipc.RPC.Server;
 
+import cn.itcast.tom.hadoop.hadooprpc.common.NameNodeMetaData;
+
 /**
  *
  * <p>Title:RpcServer.java</p>
@@ -14,10 +16,8 @@ import org.apache.hadoop.ipc.RPC.Server;
  * @author TOM
  * @date 2017年2月28日上午10:31:10
  */
-public class RpcServer implements Bizable{
-	public String sysHi(String name){
-		return "HI~"+ name;
-	}
+public class RpcServer{
+
 	/**
 	 * 
 	 * @MethodName:main
@@ -31,7 +31,12 @@ public class RpcServer implements Bizable{
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, HadoopIllegalArgumentException, IOException {
 		Configuration conf = new Configuration();
-		Server server = new RPC.Builder(conf).setProtocol(Bizable.class).setInstance(new RpcServer()).setBindAddress("127.0.0.1").setPort(9527).build();
+		Server server = new RPC.Builder(conf)
+				.setProtocol(NameNodeMetaData.class)
+				.setInstance(new NameNodeMetaDataImpl())
+				.setBindAddress("127.0.0.1")
+				.setPort(9527)
+				.build();
 		server.start();
 	}
 }

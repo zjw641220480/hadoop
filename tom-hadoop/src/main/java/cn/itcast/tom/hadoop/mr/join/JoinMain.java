@@ -36,7 +36,7 @@ public class JoinMain {
 		job.setOutputValueClass(NullWritable.class);
 
 		// 指定job的输入原始文件所在目录
-		FileInputFormat.setInputPaths(job, new Path("/join/in"));
+		FileInputFormat.setInputPaths(job, new Path("/join/in/item.txt"));
 		// 指定输出结果所在目录
 		FileOutputFormat.setOutputPath(job, new Path("/join/out"));
 

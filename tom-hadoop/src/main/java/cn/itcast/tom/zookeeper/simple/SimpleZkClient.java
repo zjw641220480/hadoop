@@ -34,10 +34,10 @@ public class SimpleZkClient {
 			
 			public void process(WatchedEvent event) {
 				//收到事件通知后的回调函数,应该是我们自己的事件处理逻辑
-				System.out.println(event.getType()+"\t"+event.getPath());
-				System.out.println(event.getType().getIntValue());
+				System.out.print(event.getType()+"\t"+event.getPath());
+				System.out.print(event.getType().getIntValue());
+				System.out.println("调用了process");
 				try {
-					//zooKeeper.getChildren("/", true);
 					getChildren();
 				} catch (KeeperException e) {
 					e.printStackTrace();
@@ -66,7 +66,7 @@ public class SimpleZkClient {
 		 * 参数3:节点的权限
 		 * 参数4:节点类型
 		 */
-		String str = zooKeeper.create("/eclipse", "eclipse".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+		String str = zooKeeper.create("/first", "firstData".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 		System.out.println(str);
 	}
 	/**
@@ -100,7 +100,7 @@ public class SimpleZkClient {
 	 */
 	@Test
 	public void testGetData() throws KeeperException, InterruptedException, UnsupportedEncodingException{
-		byte[] bytes = zooKeeper.getData("/app1", true, null);
+		byte[] bytes = zooKeeper.getData("/first", true, null);
 		System.out.println(new String(bytes,"UTF-8"));
 	}
 	/**
@@ -129,7 +129,7 @@ public class SimpleZkClient {
 	@Test
 	public void testDeleteChildren() throws InterruptedException, KeeperException{
 		//参数2:指定要删除的版本,-1表示删除所有版本
-		zooKeeper.delete("/eclipse", -1);
+		zooKeeper.delete("/first", -1);
 	}
 	/**
 	 * 

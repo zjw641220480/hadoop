@@ -35,7 +35,7 @@ public class DistributedClient {
 	/**
 	 * 
 	 * @MethodName:getConnect
-	 * @Description:
+	 * @Description:获取连接,并且在获取连接的同时获取服务端列表
 	 * @return
 	 * @Time:2017年4月10日下午5:50:32
 	 * @author:Tom
@@ -85,7 +85,7 @@ public class DistributedClient {
 	 * @throws KeeperException 
 	 */
 	public void getServerList() throws KeeperException, InterruptedException{
-		//这一句会启用监听
+		//这一句会启用监听(获取节点的时候启动监听)
 		List<String> list = zooKeeper.getChildren(parentNode, true);
 		//先创建一个局部的List来存服务器信息;
 		List<String> servers = new ArrayList<String>();
@@ -121,6 +121,7 @@ public class DistributedClient {
 		while(true){
 			int index = client.getServerIndex();
 			System.out.println("获取到的服务器端节点名称为:\t"+client.serverList.get(index));
+			Thread.currentThread().sleep(1000l);
 		}
 	}
 }

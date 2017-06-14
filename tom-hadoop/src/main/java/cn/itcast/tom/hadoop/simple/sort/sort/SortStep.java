@@ -31,7 +31,7 @@ public class SortStep {
 		job.setMapOutputValueClass(NullWritable.class);
 		job.setJarByClass(SortStep.class);
 
-		FileInputFormat.setInputPaths(job, new Path("/outsum/part-r-00000"));
+		FileInputFormat.setInputPaths(job, new Path("/http/httpout/part-r-00001"));
 
 		job.setReducerClass(SortReducer.class);
 		job.setOutputKeyClass(Text.class);

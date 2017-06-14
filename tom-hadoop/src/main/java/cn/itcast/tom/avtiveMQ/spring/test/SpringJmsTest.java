@@ -2,13 +2,10 @@ package cn.itcast.tom.avtiveMQ.spring.test;
 
 import javax.jms.Destination;
 
-import org.apache.activemq.command.ActiveMQQueue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,8 +27,8 @@ import cn.itcast.tom.avtiveMQ.spring.topic.TopicProvider;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 // ApplicationContext context = new
-// ClassPathXmlApplicationContext("/spring/applicationContext-queue.xml");
-@ContextConfiguration("/spring/applicationContext-queue.xml")
+// ClassPathXmlApplicationContext("/spring/applicationContext-mq.xml");
+@ContextConfiguration("/spring/applicationContext-mq.xml")
 public class SpringJmsTest {
 	/**
 	 * 队列名queue1
@@ -82,7 +79,7 @@ public class SpringJmsTest {
 	}
 
 	/**
-	 * 测试消费者从queue1接受消息
+	 * 测试消费者从queue1接受消息,此种方式只能接收一次,
 	 */
 	@Test
 	public void testConsume() {

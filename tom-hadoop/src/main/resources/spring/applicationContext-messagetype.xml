@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 配置JMS连接工厂 -->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="failover:(tcp://localhost:61616)" />
+		<!-- 下面是当消息类型为JAVABEAN时候需要的配置,MQ队列不建议使用此种消息类型 -->
+		<property name="trustAllPackages" value="true"></property>
+	</bean>
+
+	<!-- 定义消息队列（Queue） -->
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
+		<constructor-arg>
+			<value>queue1</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- 配置JMS模板（Queue），Spring提供的JMS工具类，它发送、接收消息。 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="queueDestination" />
+		<property name="receiveTimeout" value="10000" />
+	</bean>
+
+	<!--queue消息生产者 -->
+	<bean id="producerService"
+		class="cn.itcast.tom.avtiveMQ.spring.queue.messagetype.MessageTypePro">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+	</bean>
+
+	<!--queue消息消费者 -->
+	<bean id="consumerService"
+		class="cn.itcast.tom.avtiveMQ.spring.queue.messagetype.MessageTypeCon">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+	</bean>
+
+</beans>

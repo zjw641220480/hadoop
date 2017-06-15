@@ -66,7 +66,7 @@ public class SimpleZkClient {
 		 * 参数3:节点的权限
 		 * 参数4:节点类型
 		 */
-		String str = zooKeeper.create("/first", "firstData".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+		String str = zooKeeper.create("/locks", "locks".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 		System.out.println(str);
 	}
 	/**

@@ -5,4 +5,4 @@
 	
 	Zookeeper服务端注册了多种服务,客户端可以模拟随机访问某种服务,
 	
-	Hadoop使用Zookeeper是多个NameNode使用同一个节点,节点上保存的数据随NameNode的上下线而数据不同
+	Hadoop使用Zookeeper是多个NameNode使用同一个节点,节点上保存的数据随NameNode的上下线而数据不同,更改节点上保存的数据;

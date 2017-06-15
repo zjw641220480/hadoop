@@ -14,24 +14,31 @@
 	<packaging>war</packaging>
 	<name>tom-hadoop Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<hadoop.version>2.2.0</hadoop.version>
+		<storm.version>0.9.5</storm.version>
+		<spring.version>4.2.6.RELEASE</spring.version>
+		<kafka.version></kafka.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
-			<version>2.2.0</version>
+			<version>${hadoop.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-hdfs</artifactId>
-			<version>2.2.0</version>
+			<version>${hadoop.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-mapreduce-client-core</artifactId>
-			<version>2.2.0</version>
+			<version>${hadoop.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-common -->
 		<dependency>
@@ -58,7 +65,7 @@
 			<artifactId>zookeeper</artifactId>
 			<version>3.4.5</version>
 		</dependency>
-
+		<!-- 可能并不需要 -->
 		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
 		<dependency>
 			<groupId>io.netty</groupId>
@@ -66,12 +73,44 @@
 			<version>4.1.9.Final</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-core -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-core</artifactId>
 			<version>5.7.0</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-exec -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-exec</artifactId>
+			<version>0.13.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.apache.storm/storm-core -->
+		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-core</artifactId>
+			<version>${storm.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka_2.11 -->
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.11</artifactId>
+			<version>0.10.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.14.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>tom-hadoop</finalName>

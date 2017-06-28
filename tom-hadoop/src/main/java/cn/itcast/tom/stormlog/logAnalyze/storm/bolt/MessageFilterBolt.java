@@ -30,6 +30,8 @@ public class MessageFilterBolt extends BaseBasicBolt{
 			return;
 		}
 		collector.emit(new Values(logMessage.getType(),logMessage));
+		//定时更新规则信息
+       // LogAnalyzeHandler.scheduleLoad();
 	}
 
 	@Override

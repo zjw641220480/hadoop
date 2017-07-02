@@ -29,19 +29,27 @@ public class MultiplexerTimeServer {
 		//打开一个selector(选择器,监听器)
 		selector = Selector.open();
 		//创建一个channel
-		channel = ServerSocketChannel.open();
-		channel.configureBlocking(false);
-		channel.socket().bind(new InetSocketAddress(port), 1024);
+		channel = ServerSocketChannel.open();//服务端打开一个通道,主要也是对通道的操作;
+		channel.configureBlocking(false);//设置则此通道非阻塞模式 
+		channel.socket().bind(new InetSocketAddress(port), 1024);//服务端Socket绑定的端口
 		//将这个channel注册到selector上(接收请求),每一个channel有其对应的key值
 		//注册的是接收请求的事件(监听)
 		channel.register(selector, SelectionKey.OP_ACCEPT);
 		System.out.println("The time server is start in port : " + port);
+		System.out.println(channel.hashCode());
 	}
 
 	public void stop() {
 		this.stop = true;
 	}
-
+	/**
+	 * 
+	 * @MethodName:doServer
+	 * @Description:主要是对键的筛选,
+	 * @throws IOException
+	 * @Time: 2017年6月17日 下午6:18:40
+	 * @author: TOM
+	 */
 	public void doServer() throws IOException {
 		while (true) {
 			selector.select(1000);
@@ -53,6 +61,7 @@ public class MultiplexerTimeServer {
 				it.remove();
 				try {
 					System.out.println(key.toString());
+					//下面方法是对键的使用,解析
 					handleInput(key);
 				} catch (Exception e) {
 					if (key != null) {
@@ -66,13 +75,14 @@ public class MultiplexerTimeServer {
 	}
 
 	private void handleInput(SelectionKey key) throws IOException {
-
 		if (key.isValid()) {
 			// 处理新接入的请求消息,建立SocketChannel连接,打通通道,
-			if (key.isAcceptable()) {
+			if (key.isAcceptable()) {//连接建立,开始监听,注册读取事件
+				//下面被注释的根本是不需要的,经验证,这个ServerSocketChannel和上面使用ServerSocketChannel.open()方法打开的同一个(他们的hashCode值一样);
 				// Accept the new connection
-				ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
-				SocketChannel sc = ssc.accept();
+				//ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
+				//System.out.println(ssc.hashCode());
+				SocketChannel sc = channel.accept();
 				sc.configureBlocking(false);
 				// Add the new connection to the selector
 				// 此时管道注册可读的的事件
@@ -83,7 +93,7 @@ public class MultiplexerTimeServer {
 				//拿到可读的管道监听,
 				SocketChannel sc = (SocketChannel) key.channel();
 				//从中读取到数据,并写入缓存,缓存大小为(1024)
-				ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+				ByteBuffer readBuffer = ByteBuffer.allocate(512);
 				int readBytes = sc.read(readBuffer);
 				if (readBytes > 0) {
 					//判断传递过来的数据是否完整;

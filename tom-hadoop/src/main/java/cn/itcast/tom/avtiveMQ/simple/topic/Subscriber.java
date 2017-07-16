@@ -31,7 +31,10 @@ public class Subscriber extends Thread{
 			final Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
 			Topic topic = session.createTopic(subject);
 			// MessageConsumer负责接受消息
+			// 下面是创建普通订阅,
 			MessageConsumer consumer = session.createConsumer(topic);
+			// 下面是创建持久化订阅
+			// MessageConsumer consumer = session.createDurableSubscriber(topic,"bbb"); //持久订阅
 			consumer.setMessageListener(new MessageListener() {
 
 				public void onMessage(Message msg) {

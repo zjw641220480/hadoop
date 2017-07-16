@@ -7,6 +7,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.ZooKeeperConnectionException;
@@ -118,7 +119,7 @@ public class HbaseDemo {
 	/**
 	 * 
 	 * @MethodName:testPut
-	 * @Description:
+	 * @Description:向Habse的相关表中批量提交数据
 	 * @Time:2017年3月14日下午8:27:00
 	 * @author:Tom
 	 * @throws IOException
@@ -143,17 +144,6 @@ public class HbaseDemo {
 
 	/**
 	 * 
-	 * @MethodName:testPutAll
-	 * @Description:批量插入
-	 * @Time:2017年3月14日下午8:39:50
-	 * @author:Tom
-	 */
-	public void testPutAll() {
-
-	}
-
-	/**
-	 * 
 	 * @MethodName:get
 	 * @Description:获取数据
 	 * @Time:2017年3月14日下午8:51:55
@@ -172,6 +162,31 @@ public class HbaseDemo {
 		hTable.close();
 	}
 
+	/**
+	 * 
+	 * @MethodName:getBatch
+	 * @Description:批量获取数据
+	 * @Time: 2017年7月11日 下午2:14:26
+	 * @author: TOM
+	 * @throws IOException 
+	 */
+	public void getBatch() throws IOException{
+		HTable hTable = new HTable(configuration, "peoples");
+		Scan scan = new Scan();
+		scan.setStartRow("a1".getBytes());
+		scan.setStopRow("a20".getBytes());
+		ResultScanner scanner = hTable.getScanner(scan);
+		for (Result row : scanner) {
+			System.out.println("\nRowkey: " + new String(row.getRow()));
+			for (KeyValue kv : row.raw()) {
+			     System.out.print(new String(kv.getRow()) + " ");
+			     System.out.print(new String(kv.getFamily()) + ":");
+			     System.out.print(new String(kv.getQualifier()) + " = ");
+			     System.out.print(new String(kv.getValue()));
+			     System.out.print(" timestamp = " + kv.getTimestamp() + "\n");
+			}
+		}
+	}
 	/**
 	 * 
 	 * @MethodName:getScan
@@ -194,7 +209,7 @@ public class HbaseDemo {
 	/**
 	 * 
 	 * @MethodName:delete
-	 * @Description:删除
+	 * @Description:删除给定rowKey的数据
 	 * @Time:2017年3月14日下午9:03:04
 	 * @author:Tom
 	 * @throws IOException

@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.mr.http;
+package cn.itcast.tom.hadoop.mr.httppartition;
 
 import java.io.IOException;
 import java.net.URI;
@@ -8,6 +8,9 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.compress.BZip2Codec;
+import org.apache.hadoop.io.compress.CompressionCodec;
+import org.apache.hadoop.io.compress.GzipCodec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -77,6 +80,13 @@ public class HttpMain {
 		// 指定输出结果所在目录
 		FileOutputFormat.setOutputPath(job, new Path("/http/httpout"));
 		
+		//设置Reduce的输出压缩
+		FileOutputFormat.setCompressOutput(job, true);
+		FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
+		
+		//设置map端压缩
+		configuration.setBoolean(Job.MAP_OUTPUT_COMPRESS, true);
+		configuration.setClass(Job.MAP_OUTPUT_COMPRESS_CODEC, GzipCodec.class, CompressionCodec.class);
 		
 		// 指定我们自定义的数据分区器
 		job.setPartitionerClass(HttpPartitioner.class);

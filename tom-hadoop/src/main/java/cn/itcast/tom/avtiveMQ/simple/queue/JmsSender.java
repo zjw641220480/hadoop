@@ -2,6 +2,7 @@ package cn.itcast.tom.avtiveMQ.simple.queue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
@@ -69,6 +70,8 @@ public class JmsSender {
 	      Destination destination = session.createQueue(subject);
 	      // 5. MessageProducer负责发送消息
 	      MessageProducer producer = session.createProducer(destination);
+	      // 6. 设置使用持久化的传输方式,(存储转发)消息先保存到磁盘,然后再将消息转发给消费者;
+	      producer.setDeliveryMode(DeliveryMode.PERSISTENT);
 	      TextMessage message = session.createTextMessage();
 	      for (int i = 0; i < 10; i++) {
 	        String tmp = i + ":" + msg;

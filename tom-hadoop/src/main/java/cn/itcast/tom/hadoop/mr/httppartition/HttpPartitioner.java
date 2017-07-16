@@ -1,4 +1,4 @@
-package cn.itcast.tom.hadoop.mr.http;
+package cn.itcast.tom.hadoop.mr.httppartition;
 
 import java.util.ArrayList;
 import java.util.List;

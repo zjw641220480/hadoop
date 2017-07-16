@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 
 /**
  * 使用Netty构建服务端
@@ -15,21 +16,24 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @date 2017年4月14日下午7:05:04
  */
 public class NettyServer extends ChannelInboundHandlerAdapter {
+	private static int count = 0;
 	/**
 	 * 服务端读写客户端的数据
 	 */
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		System.out.println("Server段开始读取数据......");
-		ByteBuf buf = (ByteBuf) msg;
-		byte[] req = new byte[buf.readableBytes()];
+		/*ByteBuf buf = (ByteBuf) msg;
+		byte[] req = new byte[128];
 		buf.readBytes(req);
-		String message = new String(req,"UTF-8");
+		String message = new String(req,"UTF-8");*/
+		String message = (String) msg;
 		System.out.println("接收到的客户端的数据为:\t"+message);
 		//向客户端回写数据
 		System.out.println("server开始向client发送数据");
 		String currentTime = new Date(System.currentTimeMillis()).toString();
 		ByteBuf buf2 = Unpooled.copiedBuffer(currentTime.getBytes());
+		System.out.println("服务端接收到客户端请求数据的次数为:\t"+(++count));
 		ctx.write(buf2);
 	}
 	/**

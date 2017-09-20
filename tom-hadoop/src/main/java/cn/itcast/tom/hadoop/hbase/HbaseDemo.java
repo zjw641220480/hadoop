@@ -31,8 +31,6 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.tools.javac.parser.Tokens.Comment.CommentStyle;
-
 /**
  *
  * <p>

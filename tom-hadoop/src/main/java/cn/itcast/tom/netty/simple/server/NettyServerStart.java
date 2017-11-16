@@ -66,7 +66,7 @@ public class NettyServerStart {
 				channel.pipeline().addLast(new FixedLengthFrameDecoder(30));
 				channel.pipeline().addLast(new StringDecoder());
 				channel.pipeline().addLast(new StringEncoder());
-				channel.pipeline().addLast(new NettyServer());
+				channel.pipeline().addLast(new NettyServerHandler());
 			}
 		});
 		// 最后绑定服务器等待直到绑定完成，调用sync()方法会阻塞直到服务器完成绑定,然后服务器等待通道关闭，因为使用sync()，所以关闭操作也会被阻塞。

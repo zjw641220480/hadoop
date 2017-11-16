@@ -15,7 +15,7 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
  * @author TOM
  * @date 2017年4月14日下午7:05:04
  */
-public class NettyServer extends ChannelInboundHandlerAdapter {
+public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private static int count = 0;
 	/**
 	 * 服务端读写客户端的数据

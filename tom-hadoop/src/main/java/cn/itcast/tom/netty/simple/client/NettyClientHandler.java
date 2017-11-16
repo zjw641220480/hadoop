@@ -14,7 +14,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @author TOM
  * @date 2017年4月14日下午7:28:17
  */
-public class NettyClient extends SimpleChannelInboundHandler<ByteBuf> {
+public class NettyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	/**
 	 * 从服务端接收到数据后调用
 	 */

@@ -59,7 +59,7 @@ public class NettyClientStart {
 				channel.pipeline().addLast(new FixedLengthFrameDecoder(30));
 				channel.pipeline().addLast(new StringDecoder());
 				channel.pipeline().addLast(new StringEncoder());
-				channel.pipeline().addLast(new NettyClient());//注册Handler
+				channel.pipeline().addLast(new NettyClientHandler());//注册Handler
 			}
 		});
 		ChannelFuture channelFuture;
